@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import pickle
@@ -24,17 +24,24 @@ class DataTransformation:
        'flood_proof', 'electric_supply', 'dist_from_hub', 'workers_num',
        'storage_issue_reported_l3m', 'temp_reg_mach',
        'approved_wh_govt_certificate', 'wh_breakdown_l3m', 'govt_check_l3m',
-       'product_wg_ton']
+        ]
+        columns= ['num_refill_req_l3m', 'transport_issue_l1y', 'Competitor_in_mkt',
+       'retail_shop_num', 'distributor_num', 'flood_impacted',
+       'flood_proof', 'electric_supply', 'dist_from_hub', 'workers_num',
+       'storage_issue_reported_l3m', 'temp_reg_mach',
+        'wh_breakdown_l3m', 'govt_check_l3m',
+        ]
         nominal_features= ['Location_type','zone','WH_regional_zone','wh_owner_type']
         ordinal_features= ['WH_capacity_size','approved_wh_govt_certificate']
+            
 
         preprocessor= ColumnTransformer(
             transformers=[
-                ('OneHotEncoding', OneHotEncoder(), categorical_columns),
-                # ('LabelEncoding', LabelEncoder(), ordinal_f
-                # eatures),
-                ('StandardScaler', StandardScaler(), columns)
-            ]
+                ('OneHotEncoding', OneHotEncoder(), nominal_features),
+                ('LabelEncoding', OrdinalEncoder(), ordinal_features),
+                ('StandardScaler', StandardScaler(), columns),
+                
+            ], remainder='passthrough'
         )
         
         with open(self.transform_config.preprocessor_save_path, 'wb') as preprocessor_file:
@@ -50,8 +57,8 @@ class DataTransformation:
         with open(r'artifacts\preprocessor.pkl', 'rb') as preprocessor_file:
             preprocessor= pickle.load(preprocessor_file)
 
-        train_data= preprocessor.fit_transform(train_data)
-        test_data= preprocessor.fit_transform(test_data)
+        train_data= pd.DataFrame(preprocessor.fit_transform(train_data))
+        test_data= pd.DataFrame(preprocessor.fit_transform(test_data))
 
         X_train, y_train= train_data.iloc[:,:-1], train_data.iloc[:,-1]
         X_test, y_test= train_data.iloc[:,:-1], train_data.iloc[:,-1]

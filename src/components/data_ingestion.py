@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import os
 import warnings
 warnings.filterwarnings('ignore')
-from src.logger import logging
+from logger import logging
 from dataclasses import dataclass
 
 @dataclass
@@ -52,5 +52,5 @@ class DataIngestion:
                 )
 
 
-obj = DataIngestion()
-obj.initiate_train_test_data()
+# obj = DataIngestion()
+# obj.initiate_train_test_data()
