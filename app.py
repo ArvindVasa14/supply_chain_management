@@ -60,40 +60,40 @@ def predict():
 
         return render_template('result.html', result= result['predictions'])
 
-        
+        return "done"
     except Exception as e:
         raise e
 
 
 
 
-@app.route('/predict2', methods=['POST'])
-def predict2():
-    try:
-        # Get input data from the request
-        input_data = request.get_json()
+# @app.route('/predict', methods=['POST'])
+# def predict():
+#     try:
+#         # Get input data from the request
+#         input_data = request.get_json()
 
-        columns= ['Location_type', 'WH_capacity_size', 'zone', 'WH_regional_zone',
-       'num_refill_req_l3m', 'transport_issue_l1y', 'Competitor_in_mkt',
-       'retail_shop_num', 'wh_owner_type', 'distributor_num', 'flood_impacted',
-       'flood_proof', 'electric_supply', 'dist_from_hub', 'workers_num',
-       'storage_issue_reported_l3m', 'temp_reg_mach',
-       'approved_wh_govt_certificate', 'wh_breakdown_l3m', 'govt_check_l3m']
+#         columns= ['Location_type', 'WH_capacity_size', 'zone', 'WH_regional_zone',
+#        'num_refill_req_l3m', 'transport_issue_l1y', 'Competitor_in_mkt',
+#        'retail_shop_num', 'wh_owner_type', 'distributor_num', 'flood_impacted',
+#        'flood_proof', 'electric_supply', 'dist_from_hub', 'workers_num',
+#        'storage_issue_reported_l3m', 'temp_reg_mach',
+#        'approved_wh_govt_certificate', 'wh_breakdown_l3m', 'govt_check_l3m']
 
-        # Convert JSON to DataFrame using preprocessor
-        input_df = pd.DataFrame([input_data], columns= columns)
-        preprocessed_data = preprocessor.transform(input_df)
+#         # Convert JSON to DataFrame using preprocessor
+#         input_df = pd.DataFrame([input_data], columns= columns)
+#         preprocessed_data = preprocessor.transform(input_df)
 
-        # Make predictions using the model
-        predictions = model.predict(preprocessed_data)
+#         # Make predictions using the model
+#         predictions = model.predict(preprocessed_data)
 
-        # You can format the predictions as needed
-        result = {'predictions': predictions.tolist()}
+#         # You can format the predictions as needed
+#         result = {'predictions': predictions.tolist()}
 
-        return jsonify(result)
+#         return jsonify(result)
 
-    except Exception as e:
-        return jsonify({'error': str(e)})
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
