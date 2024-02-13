@@ -1,7 +1,8 @@
 
-from src.components.data_ingestion import DataIngestion
 from logger import logging
 import os
+from src.components.data_ingestion import DataIngestion
+
 STAGE_NAME="DATA INGESTION"
 
 class DataIngestionPipeline:

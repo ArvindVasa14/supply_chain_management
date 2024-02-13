@@ -1,0 +1,38 @@
+<html>
+    <body>
+    <h1> {{message}}</h1>
+
+    
+
+   
+    <form method="post" action="/predict">
+        <input name="Location_type" placeholder="Location_type" value="Rural"/>
+        <input name="WH_capacity_size" placeholder="WH_capacity_size" value="Small"/>
+        <input name="zone" placeholder="zone" value="South">
+        <input name="WH_regional_zone" placeholder="WH_regional_zone" value="Zone 6"/>
+        <br>
+        <input name="num_refill_req_l3m" placeholder="num_refill_req_l3m" value="3"/>
+        <input name="transport_issue_l1y" placeholder="transport_issue_l1y" value="2.0"/>
+        <input name="Competitor_in_mkt" placeholder="Competitor_in_mkt" value="3"/>
+        <input name="retail_shop_num" placeholder="retail_shop_num" value="4733.0"/>
+        <br>
+        <input name="wh_owner_type" placeholder="wh_owner_type" value="Rented"/>
+        <input name="distributor_num" placeholder="distributor_num" value="41"/>
+        <input name="flood_impacted" placeholder="flood_impacted" value="0"/>
+        <input name="flood_proof" placeholder="flood_proof" value="0"/>
+        <input name="electric_supply" placeholder="electric_supply" value="0"/>
+        <br>
+        <input name="dist_from_hub" placeholder="dist_from_hub" value="175"/>
+        <input name="workers_num" placeholder="workers_num" value="27.0"/>
+        <input name="storage_issue_reported_l3m" placeholder="storage_issue_reported_l3m" value="20"/>
+        <input name="temp_reg_mach" placeholder="temp_reg_mach" value="0"/>
+        <input name="approved_wh_govt_certificate" placeholder="approved_wh_govt_certificate" value="A"/>
+        <br>
+        <input name="wh_breakdown_l3m" placeholder="wh_breakdown_l3m" value="4"/>
+        <input name="govt_check_l3m" placeholder="govt_check_l3m" value="2"/>
+        <br>
+        <button> Predict </button>
+    </form>
+
+    </body>
+</html>
